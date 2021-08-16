@@ -2,15 +2,15 @@ import request from '@/utils/request'
 
 export function login (data) {
   return request({
-    // url: '/admin/acl/index/login',
-    url: '/vue-admin-template/user/login',
+    url: '/weixinMCL/login',
+    // url: '/vue-admin-template/user/login',
     method: 'post',
     data
   })
 }
 
 export function getInfo (token) {
-  console.log(token,'token')
+  console.log(token, 'token')
   return request({
     url: '/vue-admin-template/user/info',
     // url: '/admin/acl/index/info',

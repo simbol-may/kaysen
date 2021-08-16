@@ -3,7 +3,6 @@
     <el-form
       ref="loginForm"
       :model="loginForm"
-      :rules="loginRules"
       class="login-form"
       auto-complete="on"
       label-position="left"
@@ -12,13 +11,13 @@
         <h3 class="title">Login Form</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="userCode">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
           ref="username"
-          v-model="loginForm.username"
+          v-model="loginForm.userCode"
           placeholder="Username"
           name="username"
           type="text"
@@ -79,7 +78,7 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
+      if (value.length < 3) {
         callback(new Error('密码的长度不能小于6'))
       } else {
         callback()
@@ -87,11 +86,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111',
+        userCode: '001',
+        password: '001',
       },
       loginRules: {
-        username: [
+        userCode: [
           { required: true, trigger: 'blur', validator: validateUsername },
         ],
         password: [
@@ -125,26 +124,19 @@ export default {
     handleLogin() {
       console.log(this.redirect, '111')
 
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          this.loading = true
-          this.$store
-            .dispatch('user/login', this.loginForm)
-            .then(() => {
-              // this.$router.push('/home')
+      this.loading = true
+      this.$store
+        .dispatch('user/login', this.loginForm)
+        .then(() => {
+          // this.$router.push('/home')
 
-              this.$router.push({ path: this.redirect || '/' })
-              this.loading = false
-            })
-            .catch((err) => {
-              console.log(err, '11111')
-              this.loading = false
-            })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+          this.$router.push({ path: this.redirect || '/' })
+          this.loading = false
+        })
+        .catch((err) => {
+          console.log(err, '11111')
+          this.loading = false
+        })
     },
   },
 }
