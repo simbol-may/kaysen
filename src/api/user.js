@@ -10,10 +10,12 @@ export function login (data) {
 }
 
 export function getInfo (token) {
+  console.log(token,'token')
   return request({
-    url: '/admin/acl/index/info',
+    url: '/vue-admin-template/user/info',
+    // url: '/admin/acl/index/info',
     method: 'get',
-    // params: { token }
+    params: { token }
   })
 }
 

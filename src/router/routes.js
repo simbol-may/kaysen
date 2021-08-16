@@ -31,24 +31,24 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/product/category/list',
     meta: {
-      title: '商品管理',
+      title: '菜单',
       icon: 'el-icon-s-shop'
     },
     children: [
       {
-        name: 'Category',
-        path: 'category/list',
-        component: () => import('@/views/product/category/list'),
+        name: 'whiteList',
+        path: 'whiteList',
+        component: () => import('@/views/menus/whiteList'),
         meta: {
-          title: '分类管理',
+          title: '白名单管理',
         },
       },
       {
-        name: 'Trademark',
-        path: 'trademark/list',
-        component: () => import('@/views/product/trademark/list'),
+        name: 'pwdReset',
+        path: 'pwdReset',
+        component: () => import('@/views/menus/pwdReset'),
         meta: {
-          title: '品牌管理',
+          title: '修改密码',
         },
       },
       {

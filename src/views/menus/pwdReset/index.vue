@@ -1,0 +1,14 @@
+<template>
+  <div>
+    1111111
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'pwdReset',
+}
+</script>
+
+<style lang="scss" scoped>
+</style>
