@@ -122,8 +122,6 @@ export default {
       })
     },
     handleLogin() {
-      console.log(this.redirect, '111')
-
       this.loading = true
       this.$store
         .dispatch('user/login', this.loginForm)
