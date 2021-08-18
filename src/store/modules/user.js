@@ -57,7 +57,7 @@ const actions = {
     })
   },
   // 重置密码
-  resetPassword (state, { commit }, userInfo) {
+  resetPassword ({ commit }, userInfo) {
     // const { userCode, userName,roleCode,oldPwd,newPwd } = userInfo
     return new Promise((resolve, reject) => {
       resetPassword(userInfo).then(response => {

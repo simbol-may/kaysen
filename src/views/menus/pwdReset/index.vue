@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'pwdReset',
   data() {
@@ -44,7 +44,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['name', 'userCode', 'roleCode']),
+    ...mapState({
+      roleCode: (state) => state.user.roleCode,
+      userCode: (state) => state.user.userCode,
+      userName: (state) => state.user.userName,
+    }),
   },
   methods: {
     handleBlur() {
@@ -57,13 +61,14 @@ export default {
       }
     },
     onSubmit() {
+      console.log(this.roleCode, this.userCode, this.name, '11111')
       this.loading = true
       this.$store
         .dispatch('user/resetPassword', {
           ...this.form,
           roleCode: this.roleCode,
           userCode: this.userCode,
-          userName: this.name,
+          userName: this.userName,
         })
         .then(() => {
           // this.$router.push('/home')
