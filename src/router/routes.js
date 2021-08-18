@@ -51,30 +51,6 @@ export const constantRoutes = [
           title: '修改密码',
         },
       },
-      {
-        name: 'Attr',
-        path: 'attr/list',
-        component: () => import('@/views/product/attr/list'),
-        meta: {
-          title: '平台属性管理',
-        },
-      },
-      {
-        name: 'Spu',
-        path: 'spu/list',
-        component: () => import('@/views/product/spu/list'),
-        meta: {
-          title: 'SPU管理',
-        },
-      },
-      {
-        name: 'Sku',
-        path: 'sku/list',
-        component: () => import('@/views/product/sku/list'),
-        meta: {
-          title: 'SKU管理',
-        },
-      }
     ]
   },
 

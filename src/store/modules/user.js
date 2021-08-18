@@ -1,12 +1,14 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, resetPassword, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
     token: getToken(),
-    name: '',
-    avatar: ''
+    userCode: '',
+    roleCode: '',
+    roleName: '',
+    userName: ''
   }
 }
 
@@ -19,12 +21,18 @@ const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
   },
-  SET_NAME: (state, name) => {
-    state.name = name
+  SET_USER: (state, userCode) => {
+    state.userCode = userCode
   },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
-  }
+  SET_ROLE: (state, roleCode) => {
+    state.roleCode = roleCode
+  },
+  SET_ROLENAME: (state, roleName) => {
+    state.roleName = roleName
+  },
+  SET_NAME: (state, userName) => {
+    state.userName = userName
+  },
 }
 
 const actions = {
@@ -35,6 +43,11 @@ const actions = {
       login({ userCode: userCode.trim(), password: password }).then(response => {
         console.log(response)
         const data = response.dataInfo
+        const { userCode, roleCode, userName, roleName } = data
+        commit('SET_USER', userCode)
+        commit('SET_ROLE', roleCode)
+        commit('SET_NAME', userName)
+        commit('SET_ROLENAME', roleName)
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
@@ -43,7 +56,26 @@ const actions = {
       })
     })
   },
-
+  // 重置密码
+  resetPassword (state, { commit }, userInfo) {
+    // const { userCode, userName,roleCode,oldPwd,newPwd } = userInfo
+    return new Promise((resolve, reject) => {
+      resetPassword(userInfo).then(response => {
+        console.log(response)
+        const data = response.dataInfo
+        // const { userCode, roleCode, userName, roleName } = data
+        // commit('SET_USER', userCode)
+        // commit('SET_ROLE', roleCode)
+        // commit('SET_NAME', userName)
+        // commit('SET_ROLENAME', roleName)
+        // commit('SET_TOKEN', data.token)
+        setToken(data.token)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
   // get user info
   getInfo ({ commit }) {
     return new Promise((resolve, reject) => {

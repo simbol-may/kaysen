@@ -8,14 +8,13 @@ export function login (data) {
     data
   })
 }
-
-export function getInfo (token) {
-  console.log(token, 'token')
+// 重置密码
+export function resetPassword (data) {
   return request({
-    url: '/vue-admin-template/user/info',
+    url: '/weixinMLC/userManage/updateUserByCondition',
     // url: '/admin/acl/index/info',
-    method: 'get',
-    params: { token }
+    method: 'post',
+    data
   })
 }
 
