@@ -29,13 +29,14 @@
           </el-form-item>
         </el-col>
         <el-col :span="24" style="text-align: right">
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button type="primary" @click="onSubmit">新增</el-button>
+          <el-button type="primary" @click="search">查询</el-button>
+          <el-button type="primary" @click="add">新增</el-button>
         </el-col>
       </el-row>
     </el-form>
     <h4>查询结果</h4>
     <el-table :data="tableData1" height="250" border style="width: 100%">
+      <el-table-column type="index" width="50"> </el-table-column>
       <el-table-column
         v-for="(item, index) in tabTagName1"
         :key="index"
@@ -47,6 +48,7 @@
     </el-table>
     <h4>用户访问轨迹</h4>
     <el-table :data="tableData2" height="250" border style="width: 100%">
+      <el-table-column type="index" width="50"> </el-table-column>
       <el-table-column
         v-for="(item, index) in tabTagName2"
         :key="index"
@@ -107,6 +109,10 @@ export default {
       tableData1: [],
       tableData2: [],
     }
+  },
+  methods: {
+    search() {},
+    add() {},
   },
 }
 </script>
