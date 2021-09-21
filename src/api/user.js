@@ -20,7 +20,7 @@ export function resetPassword (data) {
 
 export function logout () {
   return request({
-    url: '/admin/acl/index/logout',
+    url: '/weixinMLC/logout',
     method: 'post'
   })
 }

@@ -1,10 +1,12 @@
 import { login, resetPassword, logout } from '@/api/user'
+import { getList } from '@/api/table'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
     token: getToken(),
+    whiteList: [],
     userCode: '',
     roleCode: '',
     roleName: '',
@@ -17,6 +19,9 @@ const state = getDefaultState()
 const mutations = {
   RESET_STATE: (state) => {
     Object.assign(state, getDefaultState())
+  },
+  GET_WHITE_LIST: (state, whiteList) => {
+    state.whiteList = whiteList
   },
   SET_TOKEN: (state, token) => {
     state.token = token
@@ -56,6 +61,25 @@ const actions = {
       })
     })
   },
+  // getWhiteList ({ commit }, userInfo) {
+  //   const { userCode, password } = userInfo
+  //   return new Promise((resolve, reject) => {
+  //     login({ userCode: userCode.trim(), password: password }).then(response => {
+  //       console.log(response)
+  //       const data = response.dataInfo
+  //       const { userCode, roleCode, userName, roleName } = data
+  //       commit('SET_USER', userCode)
+  //       commit('SET_ROLE', roleCode)
+  //       commit('SET_NAME', userName)
+  //       commit('SET_ROLENAME', roleName)
+  //       commit('SET_TOKEN', data.token)
+  //       setToken(data.token)
+  //       resolve()
+  //     }).catch(error => {
+  //       reject(error)
+  //     })
+  //   })
+  // },
   // 重置密码
   resetPassword ({ commit }, userInfo) {
     // const { userCode, userName,roleCode,oldPwd,newPwd } = userInfo

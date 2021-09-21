@@ -51,6 +51,15 @@ export const constantRoutes = [
           title: '修改密码',
         },
       },
+      {
+        name: 'addUser',
+        path: '/addUser',
+        component: () => import('@/views/menus/addUser'),
+        meta: {
+          title: '新增白名单用户',
+        },
+        hidden: true
+      },
     ]
   },
 

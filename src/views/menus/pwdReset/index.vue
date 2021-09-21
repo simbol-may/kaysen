@@ -9,7 +9,6 @@
           type="password"
           clearable
           v-model="form.newPwd"
-          @blur="handleBlur"
           minlength="6"
         ></el-input>
       </el-form-item>
@@ -70,14 +69,12 @@ export default {
           userCode: this.userCode,
           userName: this.userName,
         })
-        .then(() => {
-          // this.$router.push('/home')
-
-          // this.$router.push({ path: this.redirect || '/' })
+        .then((res) => {
+          this.$message.success('修改密码成功')
           this.loading = false
         })
         .catch((err) => {
-          console.log(err, '11111')
+          this.$message.error('修改密码失败')
           this.loading = false
         })
     },
