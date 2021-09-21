@@ -186,8 +186,10 @@ export default {
   },
   methods: {
     async getWhiteList(page = 1) {
-      this.page = page
-      console.log(this.page, '1111')
+      if (typeof page === Number) {
+        this.page = page
+      }
+      console.log(this.page, '111133')
       const {
         companyCode,
         companyName,
