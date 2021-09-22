@@ -39,7 +39,7 @@
             <!-- <el-input v-model="formSearch.roleName" clearable></el-input> -->
             <el-select
               style="width: 100%"
-              v-model="formSearch.roleName"
+              v-model="formSearch.roleCode"
               clearable
             >
               <el-option
@@ -53,7 +53,9 @@
         </el-col>
         <el-col :span="24" style="text-align: right">
           <el-button type="primary" @click="getWhiteList">查询</el-button>
-          <el-button type="primary" @click="toAddUser">新增</el-button>
+          <el-button type="primary" :disabled="!currentRow" @click="toAddUser"
+            >新增</el-button
+          >
         </el-col>
       </el-row>
     </el-form>
@@ -87,9 +89,24 @@
       style="text-align: center"
     >
     </el-pagination>
-    <el-button type="primary" @click="setState('1')">设置为有效</el-button>
-    <el-button type="primary" @click="setState('0')">设置为失效</el-button>
-    <el-button type="primary" @click="setState('2')">解除绑定</el-button>
+    <el-button
+      type="primary"
+      :disabled="!currentRow || currentRow.userState === '有效'"
+      @click="setState('1')"
+      >设置为有效</el-button
+    >
+    <el-button
+      type="primary"
+      :disabled="!currentRow || currentRow.userState === '失效'"
+      @click="setState('0')"
+      >设置为失效</el-button
+    >
+    <el-button
+      type="primary"
+      :disabled="!currentRow || currentRow.userState === '解绑'"
+      @click="setState('2')"
+      >解除绑定</el-button
+    >
     <h4>用户访问轨迹</h4>
     <el-table
       :data="operaterRecordList"
@@ -133,7 +150,7 @@ export default {
       page1: 1, // 默认页码
       limit1: 50, // 每页的条数
       total1: 0, // 总条数
-      currentRow: {},
+      currentRow: null,
       userStates: [],
       roletypes: [],
       tabTagName1: [
@@ -186,7 +203,7 @@ export default {
   },
   methods: {
     async getWhiteList(page = 1) {
-      if (typeof page === Number) {
+      if (typeof page != 'object') {
         this.page = page
       }
       console.log(this.page, '111133')
@@ -212,12 +229,14 @@ export default {
       if (result.code === 200) {
         this.whiteList = result.dataInfo.whiteUserListVOList
         this.total = result.dataInfo.total
+      } else {
+        this.$message.error(result.msg)
       }
     },
     async getRecord(page = 1) {
       this.page1 = page
       const result = await this.$API.table.getOperateRecord({
-        companyUserCode: this.formSearch.companyUserCode,
+        companyUserCode: this.currentRow.companyUserCode,
         currentPage: this.page1,
         pageSize: this.limit1,
       })
@@ -281,13 +300,15 @@ export default {
     },
 
     handleCurrentChange(val) {
+      console.log(val)
       this.currentRow = val
+      this.getRecord()
     },
     add() {},
   },
   mounted() {
     this.getWhiteList()
-    this.getRecord()
+    // this.getRecord()
     this.getState()
     this.getRole()
   },

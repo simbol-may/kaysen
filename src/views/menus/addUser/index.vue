@@ -32,7 +32,7 @@
       <el-col :span="8">
         <el-form-item label="角色:">
           <!-- <el-input v-model="dataForm.roleName" clearable></el-input> -->
-          <el-select style="width: 100%" v-model="dataForm.roleName" clearable>
+          <el-select style="width: 100%" v-model="dataForm.roleCode" clearable>
             <el-option
               v-for="item in roletypes"
               :key="item.code"
@@ -95,7 +95,7 @@ export default {
         companyUserCode,
         companyUserName,
         userState,
-        roleName,
+        roleCode,
       } = this.dataForm
       const result = await this.$API.table.addUser({
         companyCode,
@@ -104,7 +104,7 @@ export default {
         companyUserName,
         userCode: this.userCode,
         userState,
-        roleName,
+        roleCode,
       })
       if (result.code === 200) {
         this.$message.success(result.msg)
