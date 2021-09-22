@@ -25,43 +25,44 @@ export const constantRoutes = [
   },
 
   /* 商品管理 */
-  // {
-  //   name: 'Product',
-  //   path: '/product',
-  //   component: Layout,
-  //   redirect: '/product/category/list',
-  //   meta: {
-  //     title: '菜单',
-  //     icon: 'el-icon-s-shop'
-  //   },
-  //   children: [
   {
-    name: 'whiteList',
-    path: 'whiteList',
-    component: () => import('@/views/menus/whiteList'),
+    name: 'Product',
+    path: '/product',
+    component: Layout,
+    redirect: '/product/category/list',
     meta: {
-      title: '白名单管理',
+      title: '菜单',
+      icon: 'el-icon-s-shop',
+      breadcrumb: false
     },
+    children: [
+      {
+        name: 'whiteList',
+        path: 'whiteList',
+        component: () => import('@/views/menus/whiteList'),
+        meta: {
+          title: '白名单管理',
+        },
+      },
+      {
+        name: 'pwdReset',
+        path: 'pwdReset',
+        component: () => import('@/views/menus/pwdReset'),
+        meta: {
+          title: '修改密码',
+        },
+      },
+      {
+        name: 'addUser',
+        path: '/addUser',
+        component: () => import('@/views/menus/addUser'),
+        meta: {
+          title: '新增白名单用户',
+        },
+        hidden: true
+      },
+    ]
   },
-  {
-    name: 'pwdReset',
-    path: 'pwdReset',
-    component: () => import('@/views/menus/pwdReset'),
-    meta: {
-      title: '修改密码',
-    },
-  },
-  {
-    name: 'addUser',
-    path: '/addUser',
-    component: () => import('@/views/menus/addUser'),
-    meta: {
-      title: '新增白名单用户',
-    },
-    hidden: true
-  },
-  // ]
-  // },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
