@@ -213,7 +213,7 @@ export default {
         companyUserCode,
         companyUserName,
         userState,
-        roleName,
+        roleCode,
       } = this.formSearch
       const result = await this.$API.table.getList({
         companyCode,
@@ -221,11 +221,10 @@ export default {
         companyUserCode,
         companyUserName,
         userState,
-        roleName,
+        roleCode,
         currentPage: this.page,
         pageSize: this.limit,
       })
-      console.log(result, '1111')
       if (result.code === 200) {
         this.whiteList = result.dataInfo.whiteUserListVOList
         this.total = result.dataInfo.total
