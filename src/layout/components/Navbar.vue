@@ -54,7 +54,7 @@ export default {
     },
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      this.$router.push(`/login`)
     },
   },
 }
@@ -99,7 +99,7 @@ export default {
       padding: 0 8px;
       height: 100%;
       font-size: 15px;
-      color: #303133;
+      color: #fff;
       vertical-align: text-bottom;
       i {
         font-size: 16px;
