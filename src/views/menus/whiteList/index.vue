@@ -228,6 +228,9 @@ export default {
       if (result.code === 200) {
         this.whiteList = result.dataInfo.whiteUserListVOList
         this.total = result.dataInfo.total
+
+        this.operaterRecordList = []
+        this.total1 = 0
       } else {
         this.$message.error(result.msg)
       }
