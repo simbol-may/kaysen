@@ -9,7 +9,14 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <div class="right-menu-item">{{ name }}</div>
+      <div class="right-menu-item">
+        <div style="margin-right: 15px">
+          <i class="el-icon-user-solid" />{{ name }}
+        </div>
+        <div style="cursor: pointer" @click="logout">
+          <i class="el-icon-switch-button" />退出登录
+        </div>
+      </div>
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
           <!-- <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" /> -->
@@ -88,13 +95,16 @@ export default {
     }
 
     .right-menu-item {
-      display: inline-block;
+      display: flex;
       padding: 0 8px;
       height: 100%;
-      font-size: 18px;
-      color: #fff;
+      font-size: 15px;
+      color: #303133;
       vertical-align: text-bottom;
-
+      i {
+        font-size: 16px;
+        margin-right: 5px;
+      }
       &.hover-effect {
         cursor: pointer;
         transition: background 0.3s;

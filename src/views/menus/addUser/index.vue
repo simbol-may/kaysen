@@ -1,23 +1,31 @@
 <template>
-  <el-form label-width="140px" size="small">
+  <el-form
+    :model="dataForm"
+    ref="dataForm"
+    :rules="rules"
+    style="padding-top: 40px"
+    label-width="140px"
+    class="demo-ruleForm"
+    size="small"
+  >
     <el-row>
       <el-col :span="8">
-        <el-form-item label="公司名称:">
+        <el-form-item label="公司名称:" prop="companyName">
           <el-input v-model="dataForm.companyName" clearable></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="8">
-        <el-form-item label="联系人姓名:">
+        <el-form-item label="联系人姓名:" prop="companyUserName">
           <el-input v-model="dataForm.companyUserName" clearable></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="8">
-        <el-form-item label="手机号码:">
+        <el-form-item label="手机号码:" prop="companyUserCode">
           <el-input v-model="dataForm.companyUserCode" clearable></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="8">
-        <el-form-item label="状态:">
+        <el-form-item label="状态:" prop="userState">
           <el-select style="width: 100%" v-model="dataForm.userState" clearable>
             <el-option
               v-for="item in userStates"
@@ -30,7 +38,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="8">
-        <el-form-item label="角色:">
+        <el-form-item label="角色:" prop="roleCode">
           <!-- <el-input v-model="dataForm.roleName" clearable></el-input> -->
           <el-select style="width: 100%" v-model="dataForm.roleCode" clearable>
             <el-option
@@ -43,21 +51,69 @@
         </el-form-item>
       </el-col>
       <el-col :span="24" style="text-align: right">
-        <el-button type="primary" @click="addUser">新增</el-button>
+        <el-button type="primary" @click="submitForm('dataForm')"
+          >新增</el-button
+        >
       </el-col>
     </el-row>
   </el-form>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'addUser',
   data() {
+    var validate1 = (rule, value, callback) => {
+      if (!value || value.trim() === '') {
+        return callback(new Error('公司名称不能为空'))
+      } else {
+        callback()
+      }
+    }
+    var validate2 = (rule, value, callback) => {
+      if (!value || value.trim() === '') {
+        callback(new Error('联系人姓名不能为空'))
+      } else {
+        callback()
+      }
+    }
+    var validate3 = (rule, value, callback) => {
+      if (!value || value.trim() === '') {
+        callback(new Error('手机号码不能为空'))
+      } else {
+        callback()
+      }
+    }
+    var validate4 = (rule, value, callback) => {
+      if (!value || value.trim() === '') {
+        callback(new Error('状态不能为空'))
+      } else {
+        callback()
+      }
+    }
+    var validate5 = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('角色不能为空'))
+      } else {
+        callback()
+      }
+    }
     return {
       dataForm: {},
       userStates: [],
       roletypes: [],
+      rules: {
+        companyName: [{ validator: validate1, trigger: 'blur' }],
+        companyUserName: [{ validator: validate2, trigger: 'blur' }],
+        companyUserCode: [{ validator: validate3, trigger: 'blur' }],
+        userState: [{ validator: validate4, trigger: 'blur' }],
+        roleCode: [{ validator: validate5, trigger: 'blur' }],
+      },
     }
+  },
+  computed: {
+    ...mapGetters(['userCode']),
   },
   mounted() {
     this.getState()
@@ -66,8 +122,6 @@ export default {
     const { companyCode, companyName } = this.$route.query.company
     this.$set(this.dataForm, 'companyCode', companyCode)
     this.$set(this.dataForm, 'companyName', companyName)
-    // this.dataForm.companyCode = companyCode
-    // this.dataForm.companyName = companyName
   },
   methods: {
     async getState() {
@@ -88,6 +142,16 @@ export default {
         this.$set(this, 'roletypes', result.dataInfo)
       }
     },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.addUser()
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
     async addUser() {
       const {
         companyCode,
@@ -100,6 +164,7 @@ export default {
       const result = await this.$API.table.addUser({
         companyCode,
         companyName,
+        userCode: this.userCode,
         companyUserCode,
         companyUserName,
         userCode: this.userCode,
@@ -109,7 +174,7 @@ export default {
       if (result.code === 200) {
         this.$message.success(result.msg)
       } else {
-        this.$message.success(result.msg)
+        this.$message.success('请输入完整的用户信息')
       }
     },
   },

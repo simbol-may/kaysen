@@ -46,7 +46,6 @@ const actions = {
     const { userCode, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ userCode: userCode.trim(), password: password }).then(response => {
-        console.log(response)
         const data = response.dataInfo
         const { userCode, roleCode, userName, roleName } = data
         commit('SET_USER', userCode)

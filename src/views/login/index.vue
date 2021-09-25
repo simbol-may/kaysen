@@ -1,8 +1,5 @@
 <template>
   <div class="login-container">
-    <div class="logo">
-      <img src="@/assets/logo.png" />
-    </div>
     <el-form
       ref="loginForm"
       :model="loginForm"
@@ -19,7 +16,7 @@
           <el-input
             ref="username"
             v-model="loginForm.userCode"
-            placeholder="Username"
+            placeholder="账号"
             size="mini"
             name="username"
             type="text"
@@ -37,7 +34,7 @@
             size="mini"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="Password"
+            placeholder="密码"
             name="password"
             tabindex="2"
             @keyup.enter.native="handleLogin"
@@ -83,8 +80,8 @@ export default {
     }
     return {
       loginForm: {
-        userCode: '001',
-        password: '001',
+        userCode: '',
+        password: '',
       },
       loginRules: {
         userCode: [
@@ -129,7 +126,6 @@ export default {
           this.loading = false
         })
         .catch((err) => {
-          console.log(err, '11111')
           this.loading = false
         })
     },
@@ -153,6 +149,9 @@ $cursor: #000;
 
 /* reset element-ui css */
 .login-container {
+  background-image: url('../../assets/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   .el-input {
     display: inline-block;
     height: 47px;
@@ -198,13 +197,10 @@ $light_gray: #000;
   .login-form {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 520px;
-    max-width: 100%;
-    background-color: rgb(242, 242, 242);
-    // padding: 0 55px;
-    overflow: hidden;
+    top: 100px;
+    right: 10%;
+    width: 400px;
+    background-color: #f2f2f2;
   }
 
   .svg-container {
@@ -221,8 +217,9 @@ $light_gray: #000;
     height: 60px;
     text-align: center;
     line-height: 60px;
-    color: #fff;
-    background-color: rgb(217, 0, 27);
+    color: rgba(0, 0, 0, 0.561);
+    font-size: 24px;
+    font-weight: bold;
   }
   .logo {
     width: 150px;
