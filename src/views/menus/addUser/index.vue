@@ -11,7 +11,11 @@
     <el-row>
       <el-col :span="8">
         <el-form-item label="公司名称:" prop="companyName">
-          <el-input v-model="dataForm.companyName" clearable></el-input>
+          <el-input
+            disabled
+            v-model="dataForm.companyName"
+            clearable
+          ></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="8">
@@ -40,10 +44,16 @@
       <el-col :span="8">
         <el-form-item label="角色:" prop="roleCode">
           <!-- <el-input v-model="dataForm.roleName" clearable></el-input> -->
-          <el-select style="width: 100%" v-model="dataForm.roleCode" clearable>
+          <el-select
+            style="width: 100%"
+            disabled
+            v-model="dataForm.roleCode"
+            clearable
+          >
             <el-option
               v-for="item in roletypes"
               :key="item.code"
+              :checked="item.checked"
               :label="item.codeName"
               :value="item.code"
             ></el-option>
@@ -100,7 +110,9 @@ export default {
       }
     }
     return {
-      dataForm: {},
+      dataForm: {
+        roleCode: '002',
+      },
       userStates: [],
       roletypes: [],
       rules: {
