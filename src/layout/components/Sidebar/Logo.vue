@@ -7,11 +7,11 @@
         class="sidebar-logo-link"
         to="/"
       >
-        <img src="@/assets/logo.png" class="sidebar-logo" />
+<!--        <img src="@/assets/logo.png" class="sidebar-logo" />-->
         <!-- <h1 v-else class="sidebar-title">{{ title }} </h1> -->
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img src="@/assets/logo.png" class="sidebar-logo" />
+        <img src="@/assets/indexlogo.jpg" class="sidebar-logo" />
         <!-- <h1 class="sidebar-title">{{ title }}</h1> -->
       </router-link>
     </transition>
@@ -60,8 +60,8 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      width: 215px;
+      height: 50px;
       vertical-align: middle;
       margin-right: 12px;
     }

@@ -9,7 +9,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="联系人姓名:">
+          <el-form-item label="用户姓名:">
             <el-input v-model="formSearch.companyUserName" clearable></el-input>
           </el-form-item>
         </el-col>
@@ -206,7 +206,6 @@ export default {
       if (typeof page != 'object') {
         this.page = page
       }
-      console.log(this.page, '111133')
       const {
         companyCode,
         companyName,
@@ -302,7 +301,6 @@ export default {
     },
 
     handleCurrentChange(val) {
-      console.log(val)
       this.currentRow = val
       this.getRecord()
     },

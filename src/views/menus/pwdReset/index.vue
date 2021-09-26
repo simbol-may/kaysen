@@ -46,7 +46,6 @@ export default {
       }
     }
     var validatePass2 = (rule, value, callback) => {
-      console.log(value)
       if (!value || value.trim() === '') {
         callback(new Error('请再次输入密码'))
       } else if (value !== this.form.newPwd) {

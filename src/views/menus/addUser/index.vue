@@ -19,7 +19,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="8">
-        <el-form-item label="联系人姓名:" prop="companyUserName">
+        <el-form-item label="用户姓名:" prop="companyUserName">
           <el-input v-model="dataForm.companyUserName" clearable></el-input>
         </el-form-item>
       </el-col>
@@ -44,12 +44,7 @@
       <el-col :span="8">
         <el-form-item label="角色:" prop="roleCode">
           <!-- <el-input v-model="dataForm.roleName" clearable></el-input> -->
-          <el-select
-            style="width: 100%"
-            disabled
-            v-model="dataForm.roleCode"
-            clearable
-          >
+          <el-select style="width: 100%" v-model="dataForm.roleCode" clearable>
             <el-option
               v-for="item in roletypes"
               :key="item.code"
@@ -110,9 +105,7 @@ export default {
       }
     }
     return {
-      dataForm: {
-        roleCode: '002',
-      },
+      dataForm: {},
       userStates: [],
       roletypes: [],
       rules: {
@@ -130,7 +123,6 @@ export default {
   mounted() {
     this.getState()
     this.getRole()
-    console.log(this.$route, '1111')
     const { companyCode, companyName } = this.$route.query.company
     this.$set(this.dataForm, 'companyCode', companyCode)
     this.$set(this.dataForm, 'companyName', companyName)
