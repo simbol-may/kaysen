@@ -56,10 +56,7 @@
       </div>
     </el-form>
     <div class="bottom">
-      <a
-        href="https://beian.miit.gov.cn"
-        target="_blank"
-        rel="noopener noreferrer"
+      <a href="https://beian.miit.gov.cn" target="_blank"
         >粤ICP备2022003559号-1</a
       >
     </div>
