@@ -55,6 +55,14 @@
         >
       </div>
     </el-form>
+    <div class="bottom">
+      <a
+        href="https://beian.miit.gov.cn"
+        target="_blank"
+        rel="noopener noreferrer"
+        >粤ICP备2022003559号-1</a
+      >
+    </div>
   </div>
 </template>
 
@@ -179,6 +187,20 @@ $cursor: #000;
     background: rgb(232, 240, 254);
     border-radius: 5px;
     color: #454545;
+  }
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    height: 23px;
+    font-size: 14px;
+    display: table;
+    a {
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
 }
 </style>
